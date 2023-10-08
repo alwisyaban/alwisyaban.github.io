@@ -52,6 +52,14 @@
                 <label for="recipient-name" class="col-form-label">Harga</label>
                 <input type="text" class="form-control" id="hargaProduk" required />
               </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Masuk</label>
+                <input type="text" class="form-control" id="masukProduk" required />
+              </div>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Keluar</label>
+                <input type="text" class="form-control" id="keluarProduk" required />
+              </div>
             </form>
           </div>
           <!-- Modal footer -->
@@ -72,7 +80,7 @@
     <script src="https://cdn.datatables.net/responsive/2.4.0/js/responsive.bootstrap.min.js"></script>
     <script>
       $(document).ready(function () {
-        const BASE_URL = 'https://script.google.com/macros/s/AKfycbx36rKRKtscPlvsytO_ycH2H_8UvAYyVdLZLHQAJQc5QcejkybYYte_GGTEEk7klWqKHg/exec';
+        const BASE_URL = 'https://script.google.com/macros/s/AKfycbw0TlW3hfFb5X_TVuA3U_n_21mD1YkjQ2J2oH8QN_BZG15PqKd-CS1mXmO_zdIqVf1Qjw/exec';
         const table = $('#tableData').DataTable({
           ajax: BASE_URL + '?action=get-product',
           columns: [
@@ -93,6 +101,14 @@
               data: 'harga',
             },
             {
+              title: 'Masuk',
+              data: 'masuk',
+            },
+            {
+              title: 'Keluar',
+              data: 'keluar',
+            },
+            {
               title: 'Edit',
               targets: -1,
               data: null,
@@ -107,16 +123,17 @@
         $('#tambahProduk').on('click', () => {
           clear();
           $('#myModal').modal('show');
-          //$('#myModal .modal-title').text('Tambah Produk');
+          $('#myModal .modal-title').text('Tambah Produk');
         });
 
         $('#tableData tbody').on('click', '#edit', function () {
           const data = table.row($(this).parents('tr')).data();
-          console.log(data);
           $('#idProduk').val(data.id);
           $('#namaProduk').val(data.nama);
           $('#stokProduk').val(data.stok);
           $('#hargaProduk').val(data.harga);
+          $('#masukProduk').val(data.masuk);
+          $('#keluarProduk').val(data.keluar);
           $('#myModal').modal('show');
           $('#myModal .modal-title').text('Edit Produk');
         });
@@ -126,6 +143,8 @@
           const stokProduk = $('#stokProduk').val();
           const hargaProduk = $('#hargaProduk').val();
           const idProduk = $('#idProduk').val();
+          const masukProduk = $('#masukProduk').val();
+          const keluarProduk = $('#keluarProduk').val();
 
           if (namaProduk == '' || stokProduk == '' || hargaProduk == '') {
             alert('Harap Lengkapi semua field !');
@@ -135,9 +154,9 @@
           let apiUrl = '';
 
           if (idProduk) {
-            apiUrl = `${BASE_URL}?action=update&nama=${namaProduk}&stok=${stokProduk}&harga=${hargaProduk}&id=${idProduk}`;
+            apiUrl = `${BASE_URL}?action=update&nama=${namaProduk}&stok=${stokProduk}&harga=${hargaProduk}&id=${idProduk}&masuk=${masukProduk}&keluar=${keluarProduk}`;
           } else {
-            apiUrl = `${BASE_URL}?action=insert&nama=${namaProduk}&stok=${stokProduk}&harga=${hargaProduk}`;
+            apiUrl = `${BASE_URL}?action=insert&nama=${namaProduk}&stok=${stokProduk}&harga=${hargaProduk}&masuk=${masukProduk}&keluar=${keluarProduk}`;
           }
 
           $.getJSON(apiUrl, function (result) {
@@ -152,6 +171,8 @@
         $('#namaProduk').val('');
         $('#stokProduk').val('');
         $('#hargaProduk').val('');
+        $('#masukProduk').val('');
+        $('#keluarProduk').val('');
       }
     </script>
   </body>
