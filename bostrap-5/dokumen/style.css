@@ -4,10 +4,30 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(78, 78, 89);
+}
+
 .navbar {
   background-color: rgb(203, 200, 206);
 }
 .container a {
   color: rgb(19, 20, 21);
   font-weight: 500;
+}
+
+.card-header {
+  font-size: 15px;
+  background-color: rgb(23, 225, 158);
+  text-align: center;
+}
+
+.card-header1 {
+  background-color: rgb(119, 228, 228);
+}
+.card-header2 {
+  background-color: rgb(119, 228, 228);
+}
+.btn {
+  width: 100%;
 }
